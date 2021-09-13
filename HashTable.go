@@ -146,9 +146,9 @@ func (h *HashMap) PrintHM() {
 			for ; node != nil; node = node.next {
 				fmt.Printf("%v", node.PrintNode())
 			}
-		} else {
-			fmt.Println("index empty =>", i)
-		}
+		} //else {
+			//fmt.Println("index empty =>", i)
+		//}
 	}
 	fmt.Println("}")
 }
