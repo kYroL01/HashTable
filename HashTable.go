@@ -115,7 +115,7 @@ func (h *HashMap) Remove(key int) (int, bool) {
 			}
 		}
 	}
-	return v, b
+	return v, b // return value, bool
 }
 
 /* Hash function (see https://stackoverflow.com/a/12996028) */
