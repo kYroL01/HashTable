@@ -18,18 +18,18 @@ type HashMap struct {
 }
 
 /**
-	Create a new HashMap structure
-**/
+ * Create a new HashMap structure
+ **/
 func NewHashMap() *HashMap {
 	return &HashMap{Data: make([]*Node, MAP_SIZE)}
 }
 
 /**
-	Insert a new element in the HashMap
-	@param key
-	@param value
-	NOTE: collision are handled with linked list
-**/
+ *	Insert a new element in the HashMap
+ *	@param key
+ *	@param value
+ *	NOTE: collision are handled with linked list
+ **/
 func (h *HashMap) Insert(key int, value int) {
 
 	index := getIndex(key)
@@ -53,12 +53,12 @@ func (h *HashMap) Insert(key int, value int) {
 }
 
 /**
-	Get an element from the HashMap
-	@param key
-	@param value
-	@return (value, true) if element exists
-			(-1, false) otherwise
-**/
+ *	Get an element from the HashMap
+ *	@param key
+ *	@param value
+ *	@return (value, true) if element exists
+ *			(-1, false) otherwise
+ **/
 func (h *HashMap) Get(key int) (int, bool) {
 	index := getIndex(key)
 	if h.Data[index] != nil {
@@ -76,26 +76,36 @@ func (h *HashMap) Get(key int) (int, bool) {
 }
 
 /**
-Remove an element from the HashTable
-@param key
+ * Remove an element from the HashTable
+ * @param key
+ * @return (true, val) if elem was removed, (false, -1) if element does not exists
 **/
-func (h *HashMap) Remove(key int) {
+func (h *HashMap) Remove(key int) (int, bool) {
+
+	b := false
+	v := -1
 
 	index := getIndex(key)
 	if h.Data[index] != nil {
 		head := h.Data[index]
 		if h.Data[index].key == key && h.Data[index].next == nil {
+			b = true
+			v = h.Data[index]
 			h.Data[index] = nil
 		} else {
 			to_del := head
 			if to_del.key == key {
 				h.Data[index] = to_del.next
+				b = true
+				v = to_del
 				to_del = nil
 			} else {
 				curr := to_del.next
 				for ; curr != nil; curr = curr.next {
 					if curr.key == key {
 						to_del.next = curr.next
+						b = true
+						v = curr
 						curr = nil
 						break
 					} else {
@@ -105,6 +115,7 @@ func (h *HashMap) Remove(key int) {
 			}
 		}
 	}
+	return (v, b)
 }
 
 /* Hash function (see https://stackoverflow.com/a/12996028) */
