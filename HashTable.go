@@ -90,14 +90,14 @@ func (h *HashMap) Remove(key int) (int, bool) {
 		head := h.Data[index]
 		if h.Data[index].key == key && h.Data[index].next == nil {
 			b = true
-			v = h.Data[index]
+			v = h.Data[index].value
 			h.Data[index] = nil
 		} else {
 			to_del := head
 			if to_del.key == key {
 				h.Data[index] = to_del.next
 				b = true
-				v = to_del
+				v = to_del.value
 				to_del = nil
 			} else {
 				curr := to_del.next
@@ -105,7 +105,7 @@ func (h *HashMap) Remove(key int) (int, bool) {
 					if curr.key == key {
 						to_del.next = curr.next
 						b = true
-						v = curr
+						v = curr.value
 						curr = nil
 						break
 					} else {
@@ -158,7 +158,7 @@ func (h *HashMap) PrintHM() {
 				fmt.Printf("%v", node.PrintNode())
 			}
 		} //else {
-			//fmt.Println("index empty =>", i)
+		//fmt.Println("index empty =>", i)
 		//}
 	}
 	fmt.Println("}")
