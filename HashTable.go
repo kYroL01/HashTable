@@ -140,7 +140,7 @@ func (h *HashMap) PrintHMbuff() {
 
 func (h *HashMap) PrintHM() {
 	fmt.Println("HT { ")
-	for i, n := range h.Data {
+	for _, n := range h.Data {
 		if n != nil {
 			node := n
 			for ; node != nil; node = node.next {
